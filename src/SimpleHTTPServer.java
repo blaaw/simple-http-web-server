@@ -8,14 +8,22 @@ public class SimpleHTTPServer {
         System.out.println("Listening on port 8080...");
         while (true) {
             //run the server forever
-            try (Socket clientSocket = serverSocket.accept()) {
-                String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + java.time.LocalDate.now();
-                clientSocket.getOutputStream().write(httpResponse.getBytes("UTF-8"));
-            }
+            final Socket clientSocket = serverSocket.accept();
             //1. Read HTTP request from client
+            InputStreamReader inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            String line = bufferedReader.readLine();
+            while (!line.isEmpty()) {
+                System.out.println(line);
+                line = bufferedReader.readLine();
+            }
             //2. Prepare HTTP response
+            String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + java.time.LocalDate.now();
             //3. Send HTTP response to client
+            clientSocket.getOutputStream()
+                .write(httpResponse.getBytes("UTF-8"));
             //4. Close client socket 
+            clientSocket.close();
         }
     }
 }
