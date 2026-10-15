@@ -76,7 +76,6 @@ The folder layout is:
 public/
 ├── index.html      →  /
 ├── about.html      →  /about.html
-├── contacto.html   →  /contacto.html
 └── 404.html        →  any missing route
 ```
 
