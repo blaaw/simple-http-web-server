@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -19,7 +20,7 @@ public class SimpleHTTPServer {
                 String line = bufferedReader.readLine();
 
                 String[] partsRequest = line.split(" ");
-                String method = partsRequest[0];
+                //String method = partsRequest[0];
                 String path = partsRequest[1];
 
                 while (!line.isEmpty()) {
@@ -29,16 +30,19 @@ public class SimpleHTTPServer {
                 //2. Prepare HTTP response
                 Path rootPath = Paths.get("public");
                 if (path.equals("/")) path = "/index.html";
+
                 Path file = rootPath.resolve(path.substring(1)).normalize();
 
                 byte[] responseBody = Files.readAllBytes(file);
-                String responseHead = "HTTP/1.1 200OK\r\n"
+                String responseHead = "HTTP/1.1 200 OK\r\n"
                     + "Content-Type: text/html; charset=UTF-8\r\n"
                     + "Content-length: " + responseBody.length + "\r\n"
                     + "\r\n";
                 //3. Send HTTP response to client
+                 clientSocket.getOutputStream()
+                    .write(responseHead.getBytes(StandardCharsets.UTF_8));
                 clientSocket.getOutputStream()
-                    .write(httpResponse.getBytes("UTF-8"));
+                    .write(responseBody);
                 //4. Close client socket 
                 clientSocket.close();
             }
