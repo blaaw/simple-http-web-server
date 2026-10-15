@@ -18,7 +18,7 @@ public class SimpleHTTPServer {
                 line = bufferedReader.readLine();
             }
             //2. Prepare HTTP response
-            String httpResponse = "HTTP/1.1 200 OK\r\n\r\n" + java.time.LocalDate.now();
+            String httpResponse = "HTTP/1.1 200 OK\r\n\r\n Hi, this is my Java server and today's date is " + java.time.LocalDate.now();
             //3. Send HTTP response to client
             clientSocket.getOutputStream()
                 .write(httpResponse.getBytes("UTF-8"));
