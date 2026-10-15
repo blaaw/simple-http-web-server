@@ -33,8 +33,16 @@ public class SimpleHTTPServer {
 
                 Path file = rootPath.resolve(path.substring(1)).normalize();
 
+                String status;
+                if (Files.isRegularFile(file)) {
+                    status = "200 OK";
+                } else {
+                    status = "404 Not Found";
+                    file = rootPath.resolve("/404.html".substring(1)).normalize();
+                }
+
                 byte[] responseBody = Files.readAllBytes(file);
-                String responseHead = "HTTP/1.1 200 OK\r\n"
+                String responseHead = "HTTP/1.1 "+ status + "\r\n"
                     + "Content-Type: text/html; charset=UTF-8\r\n"
                     + "Content-length: " + responseBody.length + "\r\n"
                     + "\r\n";
