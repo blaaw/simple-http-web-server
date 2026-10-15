@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Acerca de - Simple HTTP Server</title>
+    <title>Acerca de - Simple Web Server</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -26,11 +26,21 @@
             list-style: none;
             padding: 0;
         }
+        code {
+            background-color: #e8e8e8;
+            padding: 0.1rem 0.3rem;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body>
     <h1>Acerca de</h1>
-    <p>Este proyecto es un servidor HTTP mínimo escrito en Java, creado para aprender los fundamentos de la programación de redes y los objetos lectores.</p>
+    <p>Este proyecto es un <strong>servidor web simple</strong> escrito en Java. Nació como un servidor HTTP mínimo para aprender los fundamentos de la programación de redes y los objetos lectores, y ahora también <strong>sirve páginas estáticas</strong> según la URL que pide el cliente.</p>
+    <ul>
+        <li>Lee y parsea la petición HTTP del cliente.</li>
+        <li>Sirve archivos HTML desde la carpeta <code>public/</code>.</li>
+        <li>Responde con una página de error 404 cuando el archivo no existe.</li>
+    </ul>
     <p><a href="/">Volver al inicio</a></p>
 </body>
 </html>
