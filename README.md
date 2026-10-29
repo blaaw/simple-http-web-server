@@ -108,10 +108,10 @@ javac -d bin src/SimpleHTTPServer.java
 java -cp bin SimpleHTTPServer
 ```
 
-Then open a browser or use `curl`:
+Then open a browser and type:
 
 ```bash
-curl http://localhost:8080/            # index.html
-curl http://localhost:8080/about.html  # about.html
-curl http://localhost:8080/noexiste    # 404.html
+http://localhost:8080/            # index.html
+http://localhost:8080/about.html  # about.html
+http://localhost:8080/noexiste    # 404.html
 ```
